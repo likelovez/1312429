@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Video to use:</p>
+<video id="video1" controls width="320" autoplay>
+  <source src="mov_bbb.mp4" type='video/mp4'>
+</video>
+
+<p>Canvas (the code draws the current frame of the video every 20 millisecond):</p>
+<canvas id="myCanvas" width="270" height="135" style="border:3px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+var v = document.getElementById("video1");
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+var i;
+var c = 0;
+
+v.addEventListener("play", function() {
+i = window.setInterval(function() {
+        var c = Math.round(v.currentTime * 25)
+        var image = new Image();
+        image.src = "/static/" + c + ".jpg";
+        image.onload = function() {
+        ctx.drawImage(image,5,5,260,125)}},40);
+}, false);
+v.addEventListener("pause", function() {window.clearInterval(i);}, false);
+v.addEventListener("ended", function() {clearInterval(i);}, false); 
+ 
+</script>
+
+<p><strong>Note:</strong> Sorry for my bad technique with nodejs :D </p>
+
+</body>
+</html>
